@@ -1,0 +1,26 @@
+<div *ngIf="opportunities?.length" class="wrapper"
+ infinite-scroll infiniteScrollDistance="2" (scrolled)="fetchOpportunities()">
+<app-update-opp [opportunity]="clickedOpp" (refresh)="refreshUpdatedOpp($event)"></app-update-opp>
+  <div *ngFor="let opportunity of opportunities" class="card" (click)="updateOppModal(opportunity)">
+    <img src="{{ opportunity.cover_photo_urls }}" alt="{{ opportunity.title }} Opportunity Cover Photo" style="width: 100%" class="img">
+    <div class="container">
+      <h4><strong>{{ opportunity.title }}</strong></h4>
+      <p>
+        <img src="{{ opportunity.branch.organisation.profile_photo_urls.thumb }}" alt="Organization Logo" style="max-width: 30px;">
+        <strong style="margin-left: 10px; position: absolute; margin-top: 8px">{{ opportunity.branch.organisation.name }}</strong>
+      </p>
+      <p>
+        <span style='float: left; margin-left: 5px; font-style: italic; color: grey; font-size: 14px;'>LOCATION</span>
+        <span style='float: right; margin-right: 5px; font-style: italic; color: grey; font-size: 14px;'>DURATION</span>
+        <br />
+        <span style='float: left; margin-left: 5px; width: 60%'>
+          <strong>{{ opportunity.location }}</strong>
+        </span>
+        <span style='float: right; right: 0px; width: 30%'>
+          <strong>{{ opportunity.duration }} Weeks</strong>
+        </span>
+      </p>
+    </div>
+  </div>
+  <div *ngIf="loading" style='text-align: center;'><img src="https://unixtitan.net/images/loading-svg-ajax-2.gif" alt="Loading Icon" style='width: 36px'><br />Loading...</div>
+</div>
